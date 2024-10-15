@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+</head>
+<body>
+
+<div class="whole_wrap">
+  <div class="wrap">
+    <img class="bg" src="./images/basic.jpg" alt="">
+    <img class="biceps" src="" alt="">
+  </div>
+</div>
+
+<div class="control_wrap">
+  <p>
+    <label for="amount"></label>
+    <input type="text" id="amount" readonly="">
+  </p>
+  <div id="slider"></div>
+</div>
+
+<style>
+*{margin: 0; padding: 0;}
+img{display: block;}
+.whole_wrap{text-align: center;}
+.wrap{display: inline-block; position: relative;}
+.biceps{position: absolute; right: 0; bottom: 0;}
+.control_wrap{width: 500px; margin: 20px auto 0;}
+.control_wrap p{margin-bottom: 10px;}
+.control_wrap input{border:0; color:#000; font-weight:bold; font-size: 40px; text-align: center;}
+</style>
+
+<script>
+  $(function () {
+    $("#slider").slider({
+      value: 0,
+      min: 0,
+      max: 100,
+      step: 20,
+      slide: function (event, ui) {
+        $("#amount").val(ui.value + "ml")
+        let img_src = './images/' + ui.value/10 + '.jpg'
+        $('.biceps').attr('src', img_src)
+
+        if(ui.value == 100){
+          $('.bg').attr('src', './images/pimples.jpg')
+        }else{
+          $('.bg').attr('src', './images/basic.jpg')
+        }
+      }
+    });
+    $("#amount").val($("#slider").slider("value") + "ml");
+  });
+</script>
+
+</body>
+</html>
